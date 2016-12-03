@@ -6,7 +6,7 @@
 [![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
 [![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
 
-RyuukiBook is another book store application build by Laravel 5.3 framework.
+RyuukiBook is another bookstore application build with Laravel 5.3 framework.
 
 ## Official Documentation
 
