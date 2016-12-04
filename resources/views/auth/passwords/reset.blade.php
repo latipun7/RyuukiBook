@@ -4,7 +4,7 @@
 @section('navclass', 'navbar navbar-transparent navbar-absolute')
 
 @section('header')
-<div class="header header-filter" style="background-image: url('/imgs/backgrounds/bg1.jpg'); background-size: cover; background-position: top center;">
+<div class="header header-filter" style="background-image: url('/images/backgrounds/bg1.jpg'); background-size: cover; background-position: top center;">
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
