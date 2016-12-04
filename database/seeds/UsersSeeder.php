@@ -13,19 +13,19 @@ class UsersSeeder extends Seeder
      */
     public function run()
     {
-        // Membuat role admin
+        // Create admin role
 		$adminRole = new Role();
 		$adminRole->name = "admin";
 		$adminRole->display_name = "Admin";
 		$adminRole->save();
 
-		// Membuat role member
+		// Create member role
 		$memberRole = new Role();
 		$memberRole->name = "member";
 		$memberRole->display_name = "Member";
 		$memberRole->save();
 
-		// Membuat sample admin
+		// Create sample: admin
 		$admin = new User();
 		$admin->name = 'Admin Ryuuki Book';
 		$admin->email = 'admin@ryuukibook.com';
@@ -33,7 +33,7 @@ class UsersSeeder extends Seeder
 		$admin->save();
 		$admin->attachRole($adminRole);
 		
-		// Membuat sample member
+		// Create sample: member
 		$member = new User();
 		$member->name = "Sample Member";
 		$member->email = 'member@gmail.com';
