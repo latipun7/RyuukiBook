@@ -17,7 +17,7 @@
         <div class="card-content table-responsive">
             <table class="table">
                 <thead class="text-primary">
-                	<th class="col-md-1">No</th>
+                	{{-- <th class="col-md-1">No</th> --}}
                 	<th class="col-md-7">Name</th>
                 	<th class="col-md-2">Edit</th>
                 	<th class="col-md-2">Delete</th>
@@ -26,7 +26,7 @@
                 	<?php $i = 1; ?>
                 	@foreach( $category as $categories )
                     <tr>
-                    	<td>{{ $i }}</td>
+                    	{{-- <td>{{ $i }}</td> --}}
                     	<td>{{ $categories->name }}</td>
                     	<td><a href="{!! route('categories.edit', [$categories->id]) !!}" class="btn btn-info">Edit</a></td>
                     	<td><a href="#" class="btn btn-danger">Delete</a></td>
@@ -35,8 +35,8 @@
                     @endforeach
                 </tbody>
             </table>
-            <p>{!! $category->render() !!}</p>
         </div>
     </div>
+    <div class="card"><div class="card-content text-center">{!! $category->links() !!}</div></div>
 </div>
 @endsection

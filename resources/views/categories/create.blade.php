@@ -12,6 +12,7 @@
         </div>
         <div class="card-content">
             <form class="form-horizontal" role="form" method="POST" action="{{ route('categories.store') }}">
+                {{ csrf_field() }}
                 @include('categories._form')
             </form>
         </div>

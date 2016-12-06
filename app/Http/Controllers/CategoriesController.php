@@ -14,7 +14,7 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        $category = Category::orderBy('id','desc')->paginate(10);
+        $category = Category::orderBy('id','desc')->paginate(5);
         return view('categories.index')->with(compact('category'));
     }
 
@@ -36,7 +36,9 @@ class CategoriesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, ['name' => 'required|unique:categories']);
+        $category = Category::create($request->all());
+        return redirect()->route('categories.index');
     }
 
     /**
