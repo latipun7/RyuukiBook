@@ -52,14 +52,21 @@
             <div class="sidebar-wrapper">
                 <ul class="nav">
                     <li class="@yield('dashboard')">
-                        <a href="#">
+                        <a href="{{ url('/admin/home') }}">
                             <i class="material-icons">dashboard</i>
                             <p>Dashboard</p>
                         </a>
                     </li>
 
+                    <li class="@yield('categories')">
+                        <a href="{{ route('categories.index') }}">
+                            <i class="material-icons">assignment</i>
+                            <p>Categories</p>
+                        </a>
+                    </li>
+
                     <li class="@yield('books')">
-                        <a href="#">
+                        <a href="{{-- route('books.index') --}}">
                             <i class="material-icons">book</i>
                             <p>Books</p>
                         </a>
@@ -79,15 +86,16 @@
                             <span class="icon-bar"></span>
                         </button>
                         <a class="navbar-brand" href="#">@yield('nav_title')</a>
+                        @yield('button')
                     </div>
                     <div class="collapse navbar-collapse">
                         <ul class="nav navbar-nav navbar-right">
-                            <li>
+                            {{-- <li>
                                 <a href="/home" class="dropdown-toggle" data-toggle="dropdown">
                                     <i class="material-icons">dashboard</i>
                                     <p class="hidden-lg hidden-md">Dashboard</p>
                                 </a>
-                            </li>
+                            </li> --}}
                             <li class="dropdown">
                                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                         <i class="material-icons">notifications</i>

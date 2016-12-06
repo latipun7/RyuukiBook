@@ -17,8 +17,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
-
-Route::group(['prefix'=>'admin', 'middleware'=>['auth']], function () {
-	// Route diisi disini...
+Route::group(['prefix'=>'admin', 'middleware'=>['auth', 'role:admin']], function () {
+	Route::get('/home', 'HomeController@index');
+	Route::resource('categories', 'CategoriesController');
 });
