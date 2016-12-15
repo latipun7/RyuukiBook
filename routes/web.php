@@ -20,4 +20,5 @@ Auth::routes();
 Route::group(['prefix'=>'admin', 'middleware'=>['auth', 'role:admin']], function () {
 	Route::get('/home', 'HomeController@index');
 	Route::resource('categories', 'CategoriesController');
+	Route::resource('books', 'BooksController');
 });

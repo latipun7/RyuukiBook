@@ -66,7 +66,7 @@
                     </li>
 
                     <li class="@yield('books')">
-                        <a href="{{-- route('books.index') --}}">
+                        <a href="{{ route('books.index') }}">
                             <i class="material-icons">book</i>
                             <p>Books</p>
                         </a>
