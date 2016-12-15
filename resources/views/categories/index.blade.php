@@ -24,14 +24,18 @@
                 </thead>
                 <tbody>
                 	<?php $i = 1; ?>
-                	@foreach( $category as $categories )
-                    <tr>
-                    	{{-- <td>{{ $i }}</td> --}}
-                    	<td>{{ $categories->name }}</td>
-                    	<td><a href="{!! route('categories.edit', [$categories->id]) !!}" class="btn btn-info">Edit</a></td>
-                    	<td><a href="#" class="btn btn-danger">Delete</a></td>
-                    </tr>
-                    <?php $i++; ?>
+                    @foreach( $category as $categories )
+                        <form class="form-horizontal" role="form" method="POST" action="{{ route('categories.destroy', [$categories->id]) }}">
+                            <input type="hidden" name="_method" value="DELETE" />
+                            {{ csrf_field() }}
+                            <tr>
+                                {{-- <td>{{ $i }}</td> --}}
+                                <td>{{ $categories->name }}</td>
+                                <td><a href="{!! route('categories.edit', [$categories->id]) !!}" class="btn btn-info">Edit</a></td>
+                                <td><button type="submit" class="btn btn-danger">Delete</button></td>
+                            </tr>
+                            <?php $i++; ?>
+                        </form>
                     @endforeach
                 </tbody>
             </table>

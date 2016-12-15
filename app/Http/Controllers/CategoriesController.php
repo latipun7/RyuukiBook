@@ -104,6 +104,13 @@ class CategoriesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Category::destroy($id);
+
+        Session::flash("flash_notification", [
+            "level"=>"success",
+            "message"=>"Category deleted."
+        ]);
+
+        return redirect()->route('categories.index');
     }
 }
