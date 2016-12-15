@@ -27,7 +27,7 @@ class CategoriesController extends Controller
     public function create()
     {
         $category = new Category;
-        return view('categories.create')->with(compact('category'));;
+        return view('categories.create')->with(compact('category'));
     }
 
     /**
