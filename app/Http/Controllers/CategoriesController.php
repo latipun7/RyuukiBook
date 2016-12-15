@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Session;
 use App\Category;
 use Illuminate\Http\Request;
 
@@ -38,7 +39,14 @@ class CategoriesController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, ['name' => 'required|unique:categories']);
+
         $category = Category::create($request->all());
+
+        Session::flash("flash_notification", [
+            "level"=>"success",
+            "message"=>"Success! $category->name category created."
+        ]);
+
         return redirect()->route('categories.index');
     }
 
@@ -74,7 +82,18 @@ class CategoriesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, ['name' => 'required|unique:categories,name,'. $id]);
+
+        $category = Category::find($id);
+        $category->update($request->only('name'));
+
+        Session::flash("flash_notification", [
+            "level"=>"success",
+            "message"=>"Success! $category->name category saved."
+        ]);
+
+        return redirect()->route('categories.index');
+
     }
 
     /**

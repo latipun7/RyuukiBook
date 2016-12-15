@@ -147,6 +147,7 @@
             <div class="content">
                 <div class="container-fluid">
                     <div class="row">
+                        @include('layouts._flash')
                         @yield('content')
                     </div>
                 </div>
