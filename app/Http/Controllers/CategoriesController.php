@@ -25,7 +25,8 @@ class CategoriesController extends Controller
      */
     public function create()
     {
-        return view('categories.create');
+        $category = new Category;
+        return view('categories.create')->with(compact('category'));;
     }
 
     /**
@@ -60,7 +61,8 @@ class CategoriesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = Category::find($id);
+        return view('categories.edit')->with(compact('category'));
     }
 
     /**
