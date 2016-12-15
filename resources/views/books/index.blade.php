@@ -18,9 +18,12 @@
             <table class="table">
                 <thead class="text-primary">
                 	{{-- <th class="col-md-1">No</th> --}}
-                	<th class="col-md-7">Name</th>
-                	<th class="col-md-2">Edit</th>
-                	<th class="col-md-2">Delete</th>
+                	<th class="col-md-2">Name</th>
+                    <th class="col-md-2">Category</th>
+                    <th class="col-md-4">Description</th>
+                    <th class="col-md-2 text-center">Price</th>
+                	<th class="col-md-1 text-center">Edit</th>
+                	<th class="col-md-1 text-center">Delete</th>
                 </thead>
                 <tbody>
                 	<?php $i = 1; ?>
@@ -31,8 +34,11 @@
                             <tr>
                                 {{-- <td>{{ $i }}</td> --}}
                                 <td>{{ $books->title }}</td>
-                                <td><a href="{!! route('books.edit', [$books->id]) !!}" class="btn btn-info">Edit</a></td>
-                                <td><button type="submit" class="btn btn-danger">Delete</button></td>
+                                <td>{{ $books->category->name }}</td>
+                                <td>{{ $books->desc }}</td>
+                                <td class="text-right">{{ "Rp ".number_format($books->price,2, ',', '.') }}</td>
+                                <td class="text-center"><a href="{!! route('books.edit', [$books->id]) !!}" class="btn btn-info">Edit</a></td>
+                                <td class="text-center"><button type="submit" class="btn btn-danger">Delete</button></td>
                             </tr>
                             <?php $i++; ?>
                         </form>
