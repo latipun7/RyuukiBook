@@ -106,8 +106,9 @@ class BooksController extends Controller
      */
     public function edit($id)
     {
-        // $category = Category::find($id);
-        // return view('categories.edit')->with(compact('category'));
+        $category = Book::find($id)->category->pluck('name','id')->all(); 
+        $book     = Book::find($id);
+        return view('books.edit')->with(compact('category' ,'book'));
     }
 
     /**

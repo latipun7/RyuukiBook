@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 
 @section('books', 'active')
-@section('nav_title', 'Add Book')
+@section('nav_title', 'Edit Book')
 
 @section('content')
 <form class="form-horizontal" role="form" method="POST" enctype="multipart/form-data" action="{{ route('books.store') }}">
@@ -10,8 +10,8 @@
 <div class="col-md-8">
     <div class="card">
         <div class="card-header" data-background-color="purple">
-            <h4 class="title">Add Book</h4>
-            <p class="category">Add books here.</p>
+            <h4 class="title">Edit Book</h4>
+            <p class="category">Edit books here.</p>
         </div>
         <div class="card-content">
             @include('books._form')
@@ -22,7 +22,7 @@
 <div class="col-md-4">
     <div class="card card-profile">
         @if (isset($book) && $book->cover)
-            <div class="card-avatar">
+            <div class="card-image">
                 <a href="#">
                     <img class="img" src="{{ asset('images/book_covers/'.$book->cover) }}" />
                 </a>

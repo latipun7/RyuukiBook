@@ -12,7 +12,11 @@
 			<select class="form-control" id="category" name="category" placeholder="Select category">
 				<option class="{{ $errors->has('category') ? 'has-error' : '' }}" value="" disabled selected>Select category</option>
 				@foreach ($category as $id => $name) {
-		        	<option value="{{ $id }}">{{ $name }}</option>
+					@if (!empty($book->id))
+		        		<option value="{{ $id }}" {!! $id == $book->category->id ? 'selected' : '' !!}>{{ $name }}</option>
+		        	@else
+		        		<option value="{{ $id }}">{{ $name }}</option>
+		        	@endif
 		        }
 		        @endforeach
 			</select>
