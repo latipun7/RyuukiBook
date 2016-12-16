@@ -39,16 +39,51 @@ class BooksController extends Controller
      */
     public function store(Request $request)
     {
-        // $this->validate($request, ['name' => 'required|unique:categories']);
+        $this->validate($request, [
+            'title'       => 'required|unique:books,title',
+            'category'    => 'required|exists:categories,id',
+            'desc'        => 'required',
+            'author'      => 'required',
+            'publisher'   => 'required',
+            'price'       => 'required|numeric',
+            'cover'       => 'image|mimes:jpeg,png,bmp,gif,svg|max:2048'
+        ]);
 
-        // $category = Category::create($request->all());
+        $book = Book::create([
+            'title'       => $request->title,
+            'category_id' => $request->category,
+            'desc'        => $request->desc,
+            'author'      => $request->author,
+            'publisher'   => $request->publisher,
+            'price'       => $request->price
+        ]);
 
-        // Session::flash("flash_notification", [
-        //     "level"=>"success",
-        //     "message"=>"Success! $category->name category created."
-        // ]);
+        // fill field cover if cover uploaded
+        if ($request->hasFile('cover')) {
+            // Take uploaded file
+            $uploaded_cover = $request->file('cover');
 
-        // return redirect()->route('categories.index');
+            // take extension file
+            $extension = $uploaded_cover->getClientOriginalExtension();
+
+            // create random file name with extension
+            $filename = md5(time()) . '.' . $extension;
+
+            // save cover in folder 'images/book_covers/'
+            $destinationPath = public_path() . DIRECTORY_SEPARATOR . 'images/book_covers';
+            $uploaded_cover->move($destinationPath, $filename);
+
+            // fill cover field with created filename
+            $book->cover = $filename;
+            $book->save();
+        }
+
+        Session::flash("flash_notification", [
+            "level"=>"success",
+            "message"=>"Success! $book->title added."
+        ]);
+
+        return redirect()->route('books.index');
     }
 
     /**

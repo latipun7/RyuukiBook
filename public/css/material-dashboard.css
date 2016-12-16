@@ -1773,6 +1773,9 @@ output {
     background-image: none;
     border-bottom: 1px dotted #D2D2D2; }
 
+.has-error {
+    color: #f44336; }
+    
 .form-group {
   position: relative; }
   .form-group.label-static label.control-label, .form-group.label-placeholder label.control-label, .form-group.label-floating label.control-label {

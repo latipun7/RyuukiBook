@@ -4,7 +4,7 @@
 @section('nav_title', 'Add Book')
 
 @section('content')
-<form class="form-horizontal" role="form" method="POST" files="true" action="{{ route('books.store') }}">
+<form class="form-horizontal" role="form" method="POST" enctype="multipart/form-data" action="{{ route('books.store') }}">
 {{ csrf_field() }}
 
 <div class="col-md-8">
@@ -32,7 +32,7 @@
         <div class="content">
             <h4 class="card-title {{ $errors->has('cover') ? ' has-error' : '' }}">Cover Image</h4>
             <p class="card-content {{ $errors->has('cover') ? ' has-error' : '' }}">{{ $errors->first('cover') }}</p>
-            <input type="file" class="btn btn-primary btn-round" style="margin: 15px auto !important;">
+            <input type="file" name="cover" class="btn btn-primary btn-round" style="margin: 15px auto !important;">
         </div>
     </div>
 </div>

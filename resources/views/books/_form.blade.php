@@ -8,15 +8,16 @@
 	</div>
 	
 	<div class="col-md-6">
-		<div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
-			<select class="form-control" id="category_id" name="category_id" placeholder="Select category">
-				<option value="" disabled selected>{{ $errors->has('category_id') ? $errors->first('category_id') : 'Select category' }}</option>
+		<div class="form-group {{ $errors->has('category') ? ' has-error' : '' }}">
+			<select class="form-control" id="category" name="category" placeholder="Select category">
+				<option class="{{ $errors->has('category') ? 'has-error' : '' }}" value="" disabled selected>Select category</option>
 				@foreach ($category as $id => $name) {
 		        	<option value="{{ $id }}">{{ $name }}</option>
 		        }
 		        @endforeach
 			</select>
 			<span class="material-icons form-control-feedback">clear</span>
+			<span>{{ $errors->first('category') }}</span>
 		</div>
 	</div>
 </div>
@@ -26,7 +27,7 @@
 		<label>Description</label>
 		<div class="form-group {{ $errors->has('desc') ? ' has-error' : '' }} label-floating">
 			<label for="desc" class="control-label">{{ $errors->has('desc') ? $errors->first('desc') : 'Description about the book.' }}</label>
-			<textarea class="form-control" rows="5">{{ old('desc', $book->desc) }}</textarea>
+			<textarea class="form-control" name="desc" rows="5">{{ old('desc', $book->desc) }}</textarea>
 			<span class="material-icons form-control-feedback">clear</span>
 		</div>
 	</div>
