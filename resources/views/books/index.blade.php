@@ -33,7 +33,7 @@
                             {{ csrf_field() }}
                             <tr>
                                 {{-- <td>{{ $i }}</td> --}}
-                                <td>{{ $books->title }}</td>
+                                <td><a style="display: block;" href="{{ route('books.show', [$books->id]) }}">{{ $books->title }}</a></td>
                                 <td>{{ $books->category->name }}</td>
                                 <td>{{ $books->desc }}</td>
                                 <td class="text-right">{{ "Rp ".number_format($books->price,2, ',', '.') }}</td>
