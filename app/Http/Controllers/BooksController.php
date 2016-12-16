@@ -26,8 +26,8 @@ class BooksController extends Controller
      */
     public function create()
     {
-        // $category = new Category;
-        // return view('categories.create')->with(compact('category'));;
+        $book = new Book;
+        return view('books.create')->with(compact('book'));
     }
 
     /**

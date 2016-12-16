@@ -1885,6 +1885,9 @@ label.control-label {
   margin-top: 0;
   font-size: 11px; }
 
+.form-horizontal .form-group {
+  padding-bottom: 7px;
+  margin: 27px 0 0 0; }
 .form-group {
   padding-bottom: 7px;
   margin: 27px 0 0 0; }
