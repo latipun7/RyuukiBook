@@ -4,7 +4,8 @@
 @section('nav_title', 'Edit Book')
 
 @section('content')
-<form class="form-horizontal" role="form" method="POST" enctype="multipart/form-data" action="{{ route('books.store') }}">
+<form class="form-horizontal" role="form" method="POST" enctype="multipart/form-data" action="{{ route('books.update', [$book->id]) }}">
+<input type="hidden" name="_method" value="PUT" />
 {{ csrf_field() }}
 
 <div class="col-md-8">

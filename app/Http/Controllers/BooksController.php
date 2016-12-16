@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Session;
 use App\Book;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class BooksController extends Controller
 {
@@ -120,17 +121,64 @@ class BooksController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // $this->validate($request, ['name' => 'required|unique:categories,name,'. $id]);
+        $this->validate($request, [
+            'title'       => 'required|unique:books,title,' . $id,
+            'category'    => 'required|exists:categories,id',
+            'desc'        => 'required',
+            'author'      => 'required',
+            'publisher'   => 'required',
+            'price'       => 'required|numeric',
+            'cover'       => 'image|max:2048'
+        ]);
 
-        // $category = Category::find($id);
-        // $category->update($request->only('name'));
+        $book = Book::find($id);
+        $book->update([
+            'title'       => $request->title,
+            'category_id' => $request->category,
+            'desc'        => $request->desc,
+            'author'      => $request->author,
+            'publisher'   => $request->publisher,
+            'price'       => $request->price
+        ]);
 
-        // Session::flash("flash_notification", [
-        //     "level"=>"success",
-        //     "message"=>"Success! $category->name category saved."
-        // ]);
+        // fill field cover if cover uploaded
+        if ($request->hasFile('cover')) {
+            // Take uploaded file
+            $filename = null;
+            $uploaded_cover = $request->file('cover');
 
-        // return redirect()->route('categories.index');
+            // take extension file
+            $extension = $uploaded_cover->getClientOriginalExtension();
+
+            // create random file name with extension
+            $filename = md5(time()) . '.' . $extension;
+
+            // save cover in folder 'images/book_covers/'
+            $destinationPath = public_path() . DIRECTORY_SEPARATOR . 'images/book_covers';
+            $uploaded_cover->move($destinationPath, $filename);
+
+            // delete old cover if exist
+            if ($book->cover) {
+                $old_cover = $book->cover;
+                $filepath  = public_path() . DIRECTORY_SEPARATOR . 'images/book_covers' . DIRECTORY_SEPARATOR . $book->cover;
+                try {
+                    File::delete($filepath);
+                } catch (FileNotFoundException $e) {
+                    // File deleted/not exist
+                }
+            }
+
+            // fill cover field with created filename
+            $book->cover = $filename;
+            $book->save();
+        }
+
+        Session::flash("flash_notification", [
+            "level"=>"success",
+            "message"=>"Success! $book->title updated."
+        ]);
+
+        return redirect()->route('books.index');
 
     }
 
