@@ -190,13 +190,26 @@ class BooksController extends Controller
      */
     public function destroy($id)
     {
-        // Category::destroy($id);
+        $book = Book::find($id);
 
-        // Session::flash("flash_notification", [
-        //     "level"=>"success",
-        //     "message"=>"Category deleted."
-        // ]);
+        // delete old cover if exist
+        if ($book->cover) {
+            $old_cover = $book->cover;
+            $filepath = public_path() . DIRECTORY_SEPARATOR . 'images/book_covers' . DIRECTORY_SEPARATOR . $book->cover;
+            try {
+                File::delete($filepath);
+            } catch (FileNotFoundException $e) {
+                // File deleted/not exist
+            }
+        }
 
-        // return redirect()->route('categories.index');
+        $book->delete();
+
+        Session::flash("flash_notification", [
+            "level"=>"success",
+            "message"=>"Book success deleted."
+        ]);
+
+        return redirect()->route('books.index');
     }
 }
