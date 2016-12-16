@@ -149,6 +149,7 @@
                     <div class="row">
                         @include('layouts._flash')
                         @yield('content')
+                        @yield('modal')
                     </div>
                 </div>
             </div>

@@ -27,6 +27,12 @@
                     <img class="img" src="{{ asset('images/book_covers'.$book->cover) }}" />
                 </a>
             </div>
+        @else
+            <div class="card-image">
+                <a href="#">
+                    <img class="img" src="{{ asset('images/book_covers/no_image.jpg') }}" />
+                </a>
+            </div>
         @endif
 
         <div class="content">
