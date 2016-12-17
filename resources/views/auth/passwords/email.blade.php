@@ -1,18 +1,18 @@
 @extends('layouts.app')
 
-@section('body', 'signup-page')
-@section('navclass', 'navbar navbar-transparent navbar-absolute')
+@section('body', 'login-page')
+@section('navclass', 'navbar navbar-rose navbar-transparent navbar-absolute')
 
 <!-- Main Content -->
 @section('header')
-<div class="header header-filter" style="background-image: url('/images/backgrounds/bg1.jpg'); background-size: cover; background-position: top center;">
+<div class="page-header header-filter" style="background-image: url('/images/backgrounds/bg1.jpg'); background-size: cover; background-position: top center;">
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="card card-signup">
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/password/email') }}">
                         {{ csrf_field() }}
-                        <div class="header header-primary text-center">
+                        <div class="header header-rose text-center">
                             <h4>Reset Password</h4>
                             {{-- <div class="social-line">
                                 <a href="#pablo" class="btn btn-simple btn-just-icon">
@@ -50,7 +50,7 @@
                             </div>
 
                             <div class="footer text-center">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-rose">
                                     Send Password Reset Link
                                 </button>
                             </div>

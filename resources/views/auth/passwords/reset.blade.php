@@ -1,17 +1,17 @@
 @extends('layouts.app')
 
-@section('body', 'signup-page')
-@section('navclass', 'navbar navbar-transparent navbar-absolute')
+@section('body', 'login-page')
+@section('navclass', 'navbar navbar-rose navbar-transparent navbar-absolute')
 
 @section('header')
-<div class="header header-filter" style="background-image: url('/images/backgrounds/bg1.jpg'); background-size: cover; background-position: top center;">
+<div class="page-header header-filter" style="background-image: url('/images/backgrounds/bg1.jpg'); background-size: cover; background-position: top center;">
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="card card-signup">        
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/password/reset') }}">
                         {{ csrf_field() }}
-                        <div class="header header-primary text-center">
+                        <div class="header header-rose text-center">
                             <h4>Reset Password</h4>
                             {{-- <div class="social-line">
                                 <a href="#pablo" class="btn btn-simple btn-just-icon">
@@ -35,7 +35,7 @@
                         <div class="content">
                             <input type="hidden" name="token" value="{{ $token }}">
 
-                            <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                            <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }} form-rose">
                                 <label for="email" class="col-md-4 control-label">E-Mail Address</label>
 
                                 <div class="col-md-6">
@@ -50,7 +50,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                            <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }} form-rose">
                                 <label for="password" class="col-md-4 control-label">Password</label>
 
                                 <div class="col-md-6">
@@ -65,7 +65,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
+                            <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }} form-rose">
                                 <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
                                 <div class="col-md-6">
                                     <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
@@ -80,7 +80,7 @@
                             </div>
 
                             <div class="footer text-center">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-rose">
                                     Reset Password
                                 </button>
                             </div>

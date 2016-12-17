@@ -20,7 +20,7 @@
             </ul>
         </nav>
         <div class="copyright pull-right">
-            &copy; 2016, made with <i class="fa fa-heart heart"></i> by <a href="https://www.facebook.com/ryuukibeat" target="_blank">Latif Sulistyo</a>
+            &copy; <script>document.write(new Date().getFullYear())</script>, made with <i class="fa fa-heart heart"></i> by <a href="https://www.facebook.com/ryuukibeat" target="_blank">Latif Sulistyo</a>
         </div>
     </div>
 </footer>
