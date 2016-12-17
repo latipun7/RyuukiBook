@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('bookstore.index');
-});
+Route::get('/', 'BookStoreController@index');
 
 Auth::routes();
 

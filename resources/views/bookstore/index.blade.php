@@ -23,21 +23,23 @@
             <div class="row">
 
                 <div class="col-md-6 col-sm-6">
-                   <div class="tab-content">
+                    <div class="tab-content">
 
-                        <div class="tab-content">
-                            <div class="tab-pane" id="product-page1">
-                                 <img src="/images/book_covers/product1.jpg"/>
-                              </div>
-                        </div>
+                        {{-- <div class="tab-pane" id="product-page1"> --}}
+                            @if (!empty($featured->cover))
+                                <img src="{{ asset('images/book_covers/'.$featured->cover) }}" />
+                            @else
+                                <img src="{{ asset('images/book_covers/no_image.jpg') }}" />
+                            @endif
+                          {{-- </div> --}}
 
-                   </div>
+                    </div>
                 </div>
 
                 <div class="col-md-6 col-sm-6">
-                    <h2 class="title"> Becky Silk Blazer </h2>
-                    <h3 class="title text-rose" style="margin-top: 10px;">Category</h3>
-                    <h3 class="main-price">$335</h3>
+                    <h2 class="title">{{ $featured->title }}</h2>
+                    <h3 class="title text-rose" style="margin-top: 10px;">{{ $featured->category->name }}</h3>
+                    <h3 class="main-price">{{ "Rp ".number_format($featured->price,2, ',', '.') }}</h3>
                     <div id="acordeon">
                         <div class="panel-group" id="accordion">
                             <div class="panel panel-border panel-default">
@@ -51,7 +53,7 @@
                                 </div>
                                 <div id="collapseOne" class="panel-collapse collapse in">
                                     <div class="panel-body">
-                                        <p>Eres' daring 'Grigri Fortune' swimsuit has the fit and coverage of a bikini in a one-piece silhouette. This fuchsia style is crafted from the label's sculpting peau douce fabric and has flattering cutouts through the torso and back. Wear yours with mirrored sunglasses on vacation.</p>
+                                        <p>{{ $featured->desc }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -68,8 +70,8 @@
                                 <div id="collapseThree" class="panel-collapse collapse">
                                     <div class="panel-body">
                                         <ul>
-                                            <li>Author : </li>
-                                            <li>Publisher : </li>
+                                            <li>Author : {{ $featured->author }}</li>
+                                            <li>Publisher : {{ $featured->publisher }}</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -90,10 +92,52 @@
         {{--  --}}
 
         <div class="related-products">
-            <h3 class="title text-center">You may also be interested in:</h3>
+            <h3 class="title text-center">Newest book:</h3>
             <div class="row">
+                
+                @foreach($books as $item)
+
+                    <div class="col-sm-6 col-md-3">
+                        <div class="card card-product">
+                            <div class="card-image">
+                                <a href="#">
+                                    @if (!empty($item->cover))
+                                        <img class="img" src="{{ asset('images/book_covers/'.$item->cover) }}" />
+                                    @else
+                                        <img class="img" src="{{ asset('images/book_covers/no_image.jpg') }}" />
+                                    @endif
+                                </a>
+                            </div>
+
+                            <div class="content">
+                                <h6 class="category text-rose">{{ $item->category->name }}</h6>
+                                <h4 class="card-title">
+                                    <a href="#">{{ $item->title }}</a>
+                                </h4>
+                                <div class="card-description">
+                                    {{ str_limit($item->desc, 100) }}
+                                </div>
+                                <div class="footer">
+                                    <div class="price">
+                                        <h4>{{ "Rp ".number_format($item->price,2, ',', '.') }}</h4>
+                                    </div>
+                                    <div class="stats">
+                                        <button type="button" rel="tooltip" title="Saved to Wishlist" class="btn btn-just-icon btn-simple btn-rose">
+                                            <i class="material-icons">favorite</i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                @endforeach
 
             </div>
+            
+            <div class="card"><div class="card-content text-center">{!! $books->links() !!}</div></div>
         </div>
 
     </div>
