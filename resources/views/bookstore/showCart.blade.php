@@ -62,7 +62,7 @@
                                 {{ "Rp ".number_format($cart->price * $cart->qty,2, ',', '.') }}
                             </td>
                             <td class="td-actions">
-                                <a href="{{ url('cart/delete/'.$cart->rowId) }}" type="button" rel="tooltip" data-placement="left" title="Remove item" class="btn btn-simple">
+                                <a href="{{ route('bookstore.removeItem',$cart->rowId) }}" type="button" rel="tooltip" data-placement="left" title="Remove items" class="btn btn-simple">
                                     <i class="material-icons">close</i>
                                 </a>
                             </td>

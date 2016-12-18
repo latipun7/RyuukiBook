@@ -19,8 +19,8 @@
 <div class="section section-gray">
     <div class="container">
         <div class="main main-raised main-product">
-
             <div class="row">
+                @include('layouts._flash')
 
                 <div class="col-md-6 col-sm-6">
                     <div class="tab-content">

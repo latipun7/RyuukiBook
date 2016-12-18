@@ -73,4 +73,21 @@ class BookStoreController extends Controller
 		$cart_content = Cart::instance('shopping')->content();
 		return view('bookstore.showCart')->with(compact('cart_content'));
 	}
+
+	/**
+	 * Remove Item from cart
+	 * @param  [int] $id [item id]
+	 * @return 
+	 */
+	public function removeItem($rowId) {
+		Cart::instance('shopping')->remove($rowId);
+		$cart_content = Cart::content();
+
+		if (Cart::count() == 0) {
+		 	return redirect('/')->with("flash_notification", ['message' => 'Cart empty.', 'level' => 'warning']);
+		 }
+		else {
+			return view('bookstore.showCart')->with(compact('cart_content'));
+		}
+	}
 }
