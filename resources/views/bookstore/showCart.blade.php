@@ -70,12 +70,22 @@
                         @endforeach
 
                         <tr>
-                            <td class="highrow"></td>
-                            <td class="text-left"><strong>Subtotal</strong></td>
-                            <td class="highrow"></td>
-                            <td class="highrow"></td>
-                            <td class="td-number"><strong>{{ "Rp ".Cart::instance('shopping')->total(2, ',', '.') }}</strong></td>
-                            <td class="highrow"></td>
+                            <td colspan="3">
+                            </td>
+                            <td class="td-total">
+                               Subotal
+                            </td>
+                            <td class="td-price">
+                                {{ "Rp ".Cart::instance('shopping')->total(2, ',', '.') }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="5" class="text-right">
+                                <a href="{{ url('/') }}" class="btn btn-info btn-round">Continue Shopping <i class="material-icons">add_shopping_cart</i></a>
+                                @if (Cart::instance('shopping')->count() != 0)
+                                    <a href="{{ route('bookstore.checkout') }}" class="btn btn-rose btn-round"><i class="material-icons">done_all</i> Checkout</a>
+                                @endif
+                            </td>
                         </tr>
                     </tbody>
                 </table>

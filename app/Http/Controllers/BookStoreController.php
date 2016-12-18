@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use Session;
+use App\User;
 use App\Book;
 use App\Order;
 
@@ -11,9 +13,6 @@ use Gloudemans\Shoppingcart\Facades\Cart;
 
 class BookStoreController extends Controller
 {
-	protected $featured;
-	protected $books;
-
 	public function __construct()
 	{
 		$this->featured = Book::latest()->first();
@@ -89,5 +88,15 @@ class BookStoreController extends Controller
 		else {
 			return view('bookstore.showCart')->with(compact('cart_content'));
 		}
+	}
+
+	/**
+	 * Checkout items
+	 */
+	public function checkout()
+	{
+		$invoice = md5(time());
+		$profile = User::find(Auth::id());
+		return view('bookstore.checkout')->with(compact('invoice','profile'));
 	}
 }
