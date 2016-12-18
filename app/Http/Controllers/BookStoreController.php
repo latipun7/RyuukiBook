@@ -48,15 +48,15 @@ class BookStoreController extends Controller
 	 */
 	public function addToCart($id)
 	{
-		$book 	 = Book::find($id);
+		$book = Book::find($id);
 
 		$data = [
 			'id'	=> $book->id,
 			'name'	=> $book->title,
 			'qty'	=> 1,
 			'price'	=> $book->price,
-			[
-				'category' => $book->category,
+			'options' => [
+				'category' => $book->category->name,
 				'cover'	   => $book->cover
 			]
 		];

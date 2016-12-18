@@ -37,8 +37,8 @@
                         <tr>
                             <td>
                                 <div class="img-container">
-                                    @if (!empty($cart->cover))
-                                        <img src="{{ asset('/images/book_covers/'.$cart->cover) }}" alt="{{ $cart->name }}">
+                                    @if ($cart->options->cover != null)
+                                        <img src="{{ asset('/images/book_covers/'.$cart->options->cover) }}" alt="{{ $cart->name }}">
                                     @else
                                         <img src="{{ asset('/images/book_covers/no_image.jpg') }}" alt="{{ $cart->name }}">
                                     @endif
@@ -46,7 +46,7 @@
                             </td>
                             <td class="td-name">
                                 <a href="{{ route('bookstore.show', $cart->id) }}" class="text-rose">{{ $cart->name }}</a>
-                                <br /><small>{{ $cart->category }}</small>
+                                <br /><small>{{ $cart->options->category }}</small>
                             </td>
                             <td class="td-number">
                                 {{ "Rp ".number_format($cart->price,2, ',', '.') }}
@@ -68,6 +68,15 @@
                             </td>
                         </tr>
                         @endforeach
+
+                        <tr>
+                            <td class="highrow"></td>
+                            <td class="text-left"><strong>Subtotal</strong></td>
+                            <td class="highrow"></td>
+                            <td class="highrow"></td>
+                            <td class="td-number"><strong>{{ "Rp ".Cart::instance('shopping')->total(2, ',', '.') }}</strong></td>
+                            <td class="highrow"></td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
