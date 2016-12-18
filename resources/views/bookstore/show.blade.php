@@ -8,7 +8,7 @@
     <div class="container">
         <div class="row title-row">
             <div class="col-md-4 col-md-offset-8">
-                <button class="btn btn-white pull-right"><i class="material-icons">shopping_cart</i> 0 Items</button>
+                <button class="btn btn-white pull-right"><i class="material-icons">shopping_cart</i> {{ Cart::instance('shopping')->count() }} Items</button>
             </div>
         </div>
     </div>

@@ -8,7 +8,7 @@
     <div class="container">
         <div class="row title-row">
             <div class="col-md-4 col-md-offset-8">
-                <a class="btn btn-white pull-right"><i class="material-icons">shopping_cart</i> 0 Items</a>
+                <a class="btn btn-white pull-right"><i class="material-icons">shopping_cart</i> {{ Cart::instance('shopping')->count() }} Items</a>
             </div>
         </div>
     </div>
@@ -81,7 +81,7 @@
                     </div><!--  end acordeon -->
 
                     <div class="row text-right">
-                        <a class="btn btn-rose btn-round">Add to Cart &nbsp;<i class="material-icons">shopping_cart</i></a>
+                        <a href="{{ route('bookstore.addToCart', $featured->id) }}" class="btn btn-rose btn-round">Add to Cart &nbsp;<i class="material-icons">shopping_cart</i></a>
                     </div>
                 </div>
 
@@ -122,7 +122,7 @@
                                         <h4>{{ "Rp ".number_format($item->price,2, ',', '.') }}</h4>
                                     </div>
                                     <div class="stats">
-                                        <a type="button" rel="tooltip" title="Add to cart" class="btn btn-just-icon btn-simple btn-rose">
+                                        <a href="{{ route('bookstore.addToCart', $item->id) }}" type="button" rel="tooltip" title="Add to cart" class="btn btn-just-icon btn-simple btn-rose">
                                             &nbsp;&nbsp;<i class="material-icons">shopping_cart</i>&nbsp;
                                         </a>
                                     </div>

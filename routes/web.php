@@ -12,11 +12,25 @@
 */
 
 Route::get('/', 'BookStoreController@index');
-Route::get('/book/show/{id}',['as' => 'bookstore.show', 'uses' => 'BookStoreController@show']);
 
 Auth::routes();
 
-Route::group(['prefix'=>'admin', 'middleware'=>['auth', 'role:admin']], function () {
+/** BOOKSTORE GROUP */
+Route::group(['prefix' => 'book'], function() {
+
+	Route::get('/show/{id}',['as' => 'bookstore.show', 'uses' => 'BookStoreController@show']);
+
+	/** BOOKSTORE GROUP (REQUIRE LOGIN) */
+	Route::group(['middleware' => 'auth'], function() {
+		Route::get('/cart/{id}', ['as' => 'bookstore.addToCart', 'uses' => 'BookStoreController@addToCart']);
+	});
+
+});
+
+/**
+ * ADMIN GROUP
+ */
+Route::group(['prefix'=>'admin', 'middleware'=>['auth', 'role:admin']], function() {
 	Route::get('/home', 'HomeController@index');
 	Route::resource('categories', 'CategoriesController');
 	Route::resource('books', 'BooksController');
