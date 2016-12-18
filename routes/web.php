@@ -23,6 +23,7 @@ Route::group(['prefix' => 'book'], function() {
 	/** BOOKSTORE GROUP (REQUIRE LOGIN) */
 	Route::group(['middleware' => 'auth'], function() {
 		Route::get('/cart/{id}', ['as' => 'bookstore.addToCart', 'uses' => 'BookStoreController@addToCart']);
+		Route::get('/cart', ['as' => 'bookstore.showCart', 'uses' => 'BookStoreController@showCart']);
 	});
 
 });

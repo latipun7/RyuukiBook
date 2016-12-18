@@ -48,23 +48,29 @@ class BookStoreController extends Controller
 	 */
 	public function addToCart($id)
 	{
-		$book 	  = Book::find($id);
-    	$books 	  = $this->books;
-    	$featured = $this->featured;
-
-		$id          = $book->id;
-		$title       = $book->title;
-		$qty         = 1;
-		$price       = $book->price;
+		$book 	 = Book::find($id);
 
 		$data = [
-			'id'          => $id,
-			'name'        => $title,
-			'qty'         => $qty,
-			'price'       => $price
+			'id'	=> $book->id,
+			'name'	=> $book->title,
+			'qty'	=> 1,
+			'price'	=> $book->price,
+			[
+				'category' => $book->category,
+				'cover'	   => $book->cover
+			]
 		];
 
 		Cart::instance('shopping')->add($data);
 		return redirect('/');
+	}
+
+	/**
+	 * Show cart
+	 */
+	public function showCart()
+	{
+		$cart_content = Cart::instance('shopping')->content();
+		return view('bookstore.showCart')->with(compact('cart_content'));
 	}
 }
