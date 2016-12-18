@@ -12,6 +12,7 @@
 */
 
 Route::get('/', 'BookStoreController@index');
+Route::get('/book/show/{id}',['as' => 'bookstore.show', 'uses' => 'BookStoreController@show']);
 
 Auth::routes();
 

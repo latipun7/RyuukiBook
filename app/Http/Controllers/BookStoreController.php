@@ -21,4 +21,15 @@ class BookStoreController extends Controller
 		$books    = Book::latest()->paginate(4);
 		return view('bookstore.index')->with(compact('featured', 'books'));
 	}
+
+	/**
+	 * Show detail
+	 * @param  [type] $id 
+	 * @return \Illuminate\Http\Response
+	 */
+	public function show($id)
+	{
+		$book = Book::find($id);
+		return view('bookstore.show')->with(compact('book'));
+	}
 }

@@ -8,7 +8,7 @@
     <div class="container">
         <div class="row title-row">
             <div class="col-md-4 col-md-offset-8">
-                <a class="btn btn-white pull-right"><i class="material-icons">shopping_cart</i> 0 Items</a>
+                <button class="btn btn-white pull-right"><i class="material-icons">shopping_cart</i> 0 Items</button>
             </div>
         </div>
     </div>
@@ -26,8 +26,8 @@
                     <div class="tab-content">
 
                         {{-- <div class="tab-pane" id="product-page1"> --}}
-                            @if (!empty($featured->cover))
-                                <img src="{{ asset('/images/book_covers/'.$featured->cover) }}" />
+                            @if (!empty($book->cover))
+                                <img src="{{ asset('/images/book_covers/'.$book->cover) }}" />
                             @else
                                 <img src="{{ asset('/images/book_covers/no_image.jpg') }}" />
                             @endif
@@ -37,9 +37,9 @@
                 </div>
 
                 <div class="col-md-6 col-sm-6">
-                    <h2 class="title">{{ $featured->title }}</h2>
-                    <h3 class="title text-rose" style="margin-top: 10px;">{{ $featured->category->name }}</h3>
-                    <h3 class="main-price">{{ "Rp ".number_format($featured->price,2, ',', '.') }}</h3>
+                    <h2 class="title">{{ $book->title }}</h2>
+                    <h3 class="title text-rose" style="margin-top: 10px;">{{ $book->category->name }}</h3>
+                    <h3 class="main-price">{{ "Rp ".number_format($book->price,2, ',', '.') }}</h3>
                     <div id="acordeon">
                         <div class="panel-group" id="accordion">
                             <div class="panel panel-border panel-default">
@@ -53,7 +53,7 @@
                                 </div>
                                 <div id="collapseOne" class="panel-collapse collapse in">
                                     <div class="panel-body" style="text-align: justify; text-justify: inter-word;">
-                                        <p>{{ $featured->desc }}</p>
+                                        <p>{{ $book->desc }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -70,8 +70,8 @@
                                 <div id="collapseThree" class="panel-collapse collapse">
                                     <div class="panel-body">
                                         <ul>
-                                            <li>Author : {{ $featured->author }}</li>
-                                            <li>Publisher : {{ $featured->publisher }}</li>
+                                            <li>Author : {{ $book->author }}</li>
+                                            <li>Publisher : {{ $book->publisher }}</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -81,7 +81,7 @@
                     </div><!--  end acordeon -->
 
                     <div class="row text-right">
-                        <a class="btn btn-rose btn-round">Add to Cart &nbsp;<i class="material-icons">shopping_cart</i></a>
+                        <button class="btn btn-rose btn-round">Add to Cart &nbsp;<i class="material-icons">shopping_cart</i></button>
                     </div>
                 </div>
 
@@ -90,55 +90,6 @@
         </div>
 
         {{--  --}}
-
-        <div class="related-products">
-            <h3 class="title text-center">Newest book:</h3>
-            <div class="row">
-                
-                @foreach($books as $item)
-
-                    <div class="col-sm-6 col-md-3">
-                        <div class="card card-product">
-                            <div class="card-image">
-                                <a href="#">
-                                    @if (!empty($item->cover))
-                                        <img class="img" src="{{ asset('/images/book_covers/'.$item->cover) }}" />
-                                    @else
-                                        <img class="img" src="{{ asset('/images/book_covers/no_image.jpg') }}" />
-                                    @endif
-                                </a>
-                            </div>
-
-                            <div class="content">
-                                <h6 class="category text-rose">{{ $item->category->name }}</h6>
-                                <h4 class="card-title">
-                                    <a href="{{ route('bookstore.show', $item->id) }}">{{ $item->title }}</a>
-                                </h4>
-                                <div class="card-description" style="text-align: justify; text-justify: inter-word;">
-                                    {{ str_limit($item->desc, 100) }}
-                                </div>
-                                <div class="footer">
-                                    <div class="price">
-                                        <h4>{{ "Rp ".number_format($item->price,2, ',', '.') }}</h4>
-                                    </div>
-                                    <div class="stats">
-                                        <a type="button" rel="tooltip" title="Add to cart" class="btn btn-just-icon btn-simple btn-rose">
-                                            &nbsp;&nbsp;<i class="material-icons">shopping_cart</i>&nbsp;
-                                        </a>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                        </div>
-                    </div>
-
-                @endforeach
-
-            </div>
-            
-            <div class="card"><div class="card-content text-center">{!! $books->links() !!}</div></div>
-        </div>
 
     </div>
 </div>
