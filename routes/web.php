@@ -26,6 +26,8 @@ Route::group(['prefix' => 'book'], function() {
 		Route::get('/cart', ['as' => 'bookstore.showCart', 'uses' => 'BookStoreController@showCart']);
 		Route::get('/cart/remove/{rowId}', ['as' => 'bookstore.removeItem', 'uses' => 'BookStoreController@removeItem']);
 		Route::get('/carts/checkout', ['as' => 'bookstore.checkout', 'uses' => 'BookStoreController@checkout']);
+		Route::post('/carts/checkout/finish', ['as' => 'storeOrderStoreProfile', 'uses' => 'BookStoreController@storeOrderStoreProfile']);
+		Route::post('/carts/checkout/finish/{profile}', ['as' => 'storeOrderUpdateProfile', 'uses' => 'BookStoreController@storeOrderUpdateProfile']);
 	});
 
 });

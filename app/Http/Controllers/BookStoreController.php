@@ -6,9 +6,13 @@ use Auth;
 use Session;
 use App\User;
 use App\Book;
+use App\Item;
 use App\Order;
+use App\Profile;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreProfileRequest;
+use App\Http\Requests\UpdateProfileRequest;
 use Gloudemans\Shoppingcart\Facades\Cart;
 
 class BookStoreController extends Controller
@@ -98,5 +102,56 @@ class BookStoreController extends Controller
 		$invoice = md5(time());
 		$profile = User::find(Auth::id());
 		return view('bookstore.checkout')->with(compact('invoice','profile'));
+	}
+
+	/**
+	 * Store orders.
+	 * @param StoreProfileRequest
+	 */
+	public function storeOrderStoreProfile(StoreProfileRequest $request)
+	{
+		$cart_content = Cart::instance('shopping')->content();
+
+		$transaction  = new Order;
+		$transaction->user_id  = Auth::id();
+		$transaction->subtotal = 'Rp '.Cart::subtotal(2, ',', '.');
+		$transaction->tax      = 'Rp '.Cart::tax(2, ',', '.');
+		$transaction->invoice  = $request->invoice;
+		$transaction->save();
+
+		foreach ($cart_content as $cart) {
+			$orders = new Item;
+			$orders->book_id     = $cart->id;
+			$orders->qty 	     = $cart->qty;
+			$orders->total_price = $cart->price * $cart->qty;
+			$transaction->items()->save($orders);
+		}
+
+		Cart::destroy();
+
+		$address = new Profile;
+		$address->phone		  = $request->phone;
+		$address->street 	  = $request->street;
+		$address->city 	 	  = $request->city;
+		$address->province	  = $request->province;
+		$address->country 	  = $request->country;
+		$address->postal_code = $request->postal_code;
+		User::find(Auth::id())->profile()->save($address);
+
+		Session::flash("flash_notification", [
+            "level"=>"success",
+            "message"=>"Thank you! We will send your books after confirming your purchase."
+        ]);
+
+        return redirect('/');
+	}
+
+	/**
+	 * Store orders.
+	 * @param UpdateProfileRequest
+	 */
+	public function storeOrderUpdateProfile(UpdateProfileRequest $request, $id)
+	{
+		return $request->all();
 	}
 }

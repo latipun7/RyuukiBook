@@ -7,9 +7,15 @@
             <!--      Wizard container        -->
             <div class="wizard-container">
                 <div class="card wizard-card" data-color="red" id="wizard">
-                    <form action="" method="">
-                <!-- You can switch " data-color="purple" "  with one of the next bright colors: "green", "orange", "red", "blue" -->
 
+                @if (!empty($profile->profile))
+                    <form role="form" method="POST" action="{{ route('storeOrderUpdateProfile', [$profile->profile->id]) }}">
+                @else
+                    <form role="form" method="POST" action="{{ route('storeOrderStoreProfile') }}">
+                @endif
+                    {{ csrf_field() }}
+                    <input type="hidden" name="invoice" value={{ $invoice }}>
+                    
                         <div class="wizard-header">
                             <h3 class="wizard-title">
                                Complete Your Order
@@ -59,55 +65,45 @@
                                         <div class="col-sm-4 col-sm-offset-1">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Phone Number</label>
-                                                <input type="text" class="form-control">
+                                                <input type="text" class="form-control" name="phone" value="{{ old('phone', $profile->profile->phone) }}">
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Street Name</label>
-                                                <input type="text" class="form-control">
+                                                <input type="text" class="form-control" name="street" value="{{ old('street', $profile->profile->street) }}">
                                             </div>
                                         </div>
                                         <div class="col-sm-5 col-sm-offset-1">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">City</label>
-                                                <input type="text" class="form-control">
+                                                <input type="text" class="form-control" name="city" value="{{ old('city', $profile->profile->city) }}">
                                             </div>
                                         </div>
                                         <div class="col-sm-5">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Province</label>
-                                                <input type="text" class="form-control">
+                                                <input type="text" class="form-control" name="province" value="{{ old('province', $profile->profile->province) }}">
                                             </div>
                                         </div>
                                         <div class="col-sm-5 col-sm-offset-1">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Postal Code</label>
-                                                <input type="text" class="form-control">
+                                                <input type="text" class="form-control" name="postal_code" value="{{ old('postal_code', $profile->profile->postal_code) }}">
                                             </div>
                                         </div>
                                         <div class="col-sm-5">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Country</label>
-                                                <select name="country" class="form-control">
-                                                    <option disabled="" selected=""></option>
-                                                    <option value="Afghanistan"> Afghanistan </option>
-                                                    <option value="Albania"> Albania </option>
-                                                    <option value="Algeria"> Algeria </option>
-                                                    <option value="American Samoa"> American Samoa </option>
-                                                    <option value="Andorra"> Andorra </option>
-                                                    <option value="Angola"> Angola </option>
-                                                    <option value="Anguilla"> Anguilla </option>
-                                                    <option value="Antarctica"> Antarctica </option>
-                                                    <option value="...">...</option>
-                                                </select>
+                                                <input type="text" class="form-control" name="country" value="{{ old('country', $profile->profile->country) }}">
                                             </div>
                                         </div>
                                     </div>
 
                                     <div id="methodPDF">
                                         <div class="col-sm-12">
-                                            <h4 class="info-text"> We will send the download link to your email. </h4>
+                                            <h4 class="text-center"> We will send the download link to your email. </h4>
+                                            <h6 class="info-text" style="color: #f00;">{{ $profile->profile->email }}</h6>
                                         </div>
                                     </div>
 
