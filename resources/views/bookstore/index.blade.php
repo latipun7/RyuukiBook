@@ -92,7 +92,7 @@
         {{--  --}}
 
         <div class="related-products">
-            <h3 class="title text-center">Newest book:</h3>
+            <h3 class="title text-center">All books:</h3>
             <div class="row">
                 
                 @foreach($books as $item)
