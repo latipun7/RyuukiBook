@@ -11,7 +11,6 @@ use App\Order;
 use App\Profile;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\StoreProfileRequest;
 use App\Http\Requests\UpdateProfileRequest;
 use Gloudemans\Shoppingcart\Facades\Cart;
 
@@ -108,14 +107,25 @@ class BookStoreController extends Controller
 	 * Store orders.
 	 * @param StoreProfileRequest
 	 */
-	public function storeOrderStoreProfile(StoreProfileRequest $request)
+	public function storeOrderStoreProfile(Request $request)
 	{
-		$cart_content = Cart::instance('shopping')->content();
+		if ($request->plan == "PACKAGE") {
+			$this->validate($request, [
+				'phone'       => 'required|unique:profiles,phone',
+	            'street'      => 'required',
+	            'city'        => 'required',
+	            'province'    => 'required',
+	            'country'     => 'required',
+	            'postal_code' => 'required|numeric'
+			]);
+		}
 
+		$cart_content = Cart::instance('shopping')->content();
+		
 		$transaction  = new Order;
 		$transaction->user_id  = Auth::id();
-		$transaction->subtotal = 'Rp '.Cart::subtotal(2, ',', '.');
-		$transaction->tax      = 'Rp '.Cart::tax(2, ',', '.');
+		$transaction->subtotal = "Rp ".Cart::subtotal(2, ',', '.');
+		$transaction->tax      = "Rp ".Cart::tax(2, ',', '.');
 		$transaction->invoice  = $request->invoice;
 		$transaction->save();
 
@@ -129,14 +139,16 @@ class BookStoreController extends Controller
 
 		Cart::destroy();
 
-		$address = new Profile;
-		$address->phone		  = $request->phone;
-		$address->street 	  = $request->street;
-		$address->city 	 	  = $request->city;
-		$address->province	  = $request->province;
-		$address->country 	  = $request->country;
-		$address->postal_code = $request->postal_code;
-		User::find(Auth::id())->profile()->save($address);
+		if ($request->plan == "PACKAGE") {
+			$address = new Profile;
+			$address->phone		  = $request->phone;
+			$address->street 	  = $request->street;
+			$address->city 	 	  = $request->city;
+			$address->province	  = $request->province;
+			$address->country 	  = $request->country;
+			$address->postal_code = $request->postal_code;
+			User::find(Auth::id())->profile()->save($address);
+		}
 
 		Session::flash("flash_notification", [
             "level"=>"success",

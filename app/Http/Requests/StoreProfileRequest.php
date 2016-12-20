@@ -25,13 +25,13 @@ class StoreProfileRequest extends FormRequest
     public function rules()
     {
         return [
-            'phone' => 'required|unique:profiles,phone',
-            'street' => 'required',
-            'city' => 'required',
-            'province' => 'required',
-            'country' => 'required',
+            'phone'       => 'required|unique:profiles,phone',
+            'street'      => 'required',
+            'city'        => 'required',
+            'province'    => 'required',
+            'country'     => 'required',
             'postal_code' => 'required|numeric',
-            'photo' => 'image|max:2048'
+            'photo'       => 'image|max:2048'
         ];
     }
 }

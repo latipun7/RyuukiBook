@@ -65,37 +65,61 @@
                                         <div class="col-sm-4 col-sm-offset-1">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Phone Number</label>
-                                                <input type="text" class="form-control" name="phone" value="{{ old('phone', $profile->profile->phone) }}">
+                                                @if (!empty($profile->profile))
+                                                    <input type="text" class="form-control" name="phone" value="{{ old('phone', $profile->profile->phone) }}">
+                                                @else
+                                                    <input type="text" class="form-control" name="phone" value="{{ old('phone') }}">
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Street Name</label>
-                                                <input type="text" class="form-control" name="street" value="{{ old('street', $profile->profile->street) }}">
+                                                @if (!empty($profile->profile))
+                                                    <input type="text" class="form-control" name="street" value="{{ old('street', $profile->profile->street) }}">
+                                                @else
+                                                    <input type="text" class="form-control" name="street" value="{{ old('street') }}">
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="col-sm-5 col-sm-offset-1">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">City</label>
-                                                <input type="text" class="form-control" name="city" value="{{ old('city', $profile->profile->city) }}">
+                                                @if (!empty($profile->profile))
+                                                    <input type="text" class="form-control" name="city" value="{{ old('city', $profile->profile->city) }}">
+                                                @else
+                                                    <input type="text" class="form-control" name="city" value="{{ old('city') }}">
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="col-sm-5">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Province</label>
-                                                <input type="text" class="form-control" name="province" value="{{ old('province', $profile->profile->province) }}">
+                                                @if (!empty($profile->profile))
+                                                    <input type="text" class="form-control" name="province" value="{{ old('province', $profile->profile->province) }}">
+                                                @else
+                                                    <input type="text" class="form-control" name="province" value="{{ old('province') }}">
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="col-sm-5 col-sm-offset-1">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Postal Code</label>
-                                                <input type="text" class="form-control" name="postal_code" value="{{ old('postal_code', $profile->profile->postal_code) }}">
+                                                @if (!empty($profile->profile))
+                                                    <input type="number" class="form-control" name="postal_code" value="{{ old('postal_code', $profile->profile->postal_code) }}">
+                                                @else
+                                                    <input type="number" class="form-control" name="postal_code" value="{{ old('postal_code') }}">
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="col-sm-5">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Country</label>
-                                                <input type="text" class="form-control" name="country" value="{{ old('country', $profile->profile->country) }}">
+                                                @if (!empty($profile->profile))
+                                                    <input type="text" class="form-control" name="country" value="{{ old('country', $profile->profile->country) }}">
+                                                @else
+                                                    <input type="text" class="form-control" name="country" value="{{ old('country') }}">
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
