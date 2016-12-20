@@ -11,7 +11,6 @@ use App\Order;
 use App\Profile;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\UpdateProfileRequest;
 use Gloudemans\Shoppingcart\Facades\Cart;
 
 class BookStoreController extends Controller
@@ -121,7 +120,7 @@ class BookStoreController extends Controller
 		}
 
 		$cart_content = Cart::instance('shopping')->content();
-		
+
 		$transaction  = new Order;
 		$transaction->user_id  = Auth::id();
 		$transaction->subtotal = "Rp ".Cart::subtotal(2, ',', '.');
@@ -162,8 +161,54 @@ class BookStoreController extends Controller
 	 * Store orders.
 	 * @param UpdateProfileRequest
 	 */
-	public function storeOrderUpdateProfile(UpdateProfileRequest $request, $id)
+	public function storeOrderUpdateProfile(Request $request, $id)
 	{
-		return $request->all();
+		if ($request->plan == "PACKAGE") {
+			$this->validate($request, [
+				'phone'       => 'required|unique:profiles,phone,' . $id,
+	            'street'      => 'required',
+	            'city'        => 'required',
+	            'province'    => 'required',
+	            'country'     => 'required',
+	            'postal_code' => 'required|numeric'
+			]);
+		}
+
+		$cart_content = Cart::instance('shopping')->content();
+		
+		$transaction  = new Order;
+		$transaction->user_id  = Auth::id();
+		$transaction->subtotal = "Rp ".Cart::subtotal(2, ',', '.');
+		$transaction->tax      = "Rp ".Cart::tax(2, ',', '.');
+		$transaction->invoice  = $request->invoice;
+		$transaction->save();
+
+		foreach ($cart_content as $cart) {
+			$orders = new Item;
+			$orders->book_id     = $cart->id;
+			$orders->qty 	     = $cart->qty;
+			$orders->total_price = $cart->price * $cart->qty;
+			$transaction->items()->save($orders);
+		}
+
+		Cart::destroy();
+
+		if ($request->plan == "PACKAGE") {
+			$address = Profile::find($id);
+			$address->phone		  = $request->phone;
+			$address->street 	  = $request->street;
+			$address->city 	 	  = $request->city;
+			$address->province	  = $request->province;
+			$address->country 	  = $request->country;
+			$address->postal_code = $request->postal_code;
+			$address->save();
+		}
+
+		Session::flash("flash_notification", [
+            "level"=>"success",
+            "message"=>"Thank you! We will send your books after confirming your purchase."
+        ]);
+
+        return redirect('/');
 	}
 }
