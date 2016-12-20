@@ -103,7 +103,7 @@
                                     <div id="methodPDF">
                                         <div class="col-sm-12">
                                             <h4 class="text-center"> We will send the download link to your email. </h4>
-                                            <h6 class="info-text" style="color: #f00;">{{ $profile->profile->email }}</h6>
+                                            <h6 class="info-text" style="color: #f00;">{{ $profile->email }}</h6>
                                         </div>
                                     </div>
 
