@@ -24,15 +24,16 @@
 
                 <div class="col-md-6 col-sm-6">
                     <div class="tab-content">
-
-                        {{-- <div class="tab-pane" id="product-page1"> --}}
-                            @if (!empty($featured->cover))
-                                <img src="{{ asset('/images/book_covers/'.$featured->cover) }}" />
-                            @else
-                                <img src="{{ asset('/images/book_covers/no_image.jpg') }}" />
-                            @endif
-                          {{-- </div> --}}
-
+                        <div class="img-base">
+                            {{-- <div class="tab-pane" id="product-page1"> --}}
+                                @if (!empty($featured->cover))
+                                    <img class="img-base" src="{{ asset('/images/book_covers/'.$featured->cover) }}" />
+                                @else
+                                    <img class="img-base" src="{{ asset('/images/book_covers/no_image.jpg') }}" />
+                                @endif
+                            {{-- </div> --}}   
+                            <img class="top" src="{{ asset('/images/tag_popular.png') }}" /> 
+                        </div>
                     </div>
                 </div>
 

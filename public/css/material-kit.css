@@ -6290,12 +6290,28 @@ footer .pull-center {
   width: 100%;
   height: auto;
   text-align: center;
+  position: relative;
 }
 .product-page .tab-content img {
   border-radius: 3px;
   max-width: 300px;
   height: auto;
 }
+
+.product-page .tab-content .img-base {
+  max-width: 300px;
+  height: auto;
+  position: relative;
+  margin: 0 auto;
+}
+
+.product-page .tab-content .top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 999;
+}
+
 .product-page .main-price {
   margin: 10px 0 25px;
 }
