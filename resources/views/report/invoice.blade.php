@@ -12,6 +12,7 @@
                            Invoice
                         </h3>
                         <h5>{{ $invoice }}</h5>
+                        <h5>{{ $order->created_at }}</h5>
                     </div>
 
                     <div class="tab-content">
