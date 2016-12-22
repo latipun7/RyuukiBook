@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Item;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 
 class ReportController extends Controller
 {
@@ -19,23 +21,17 @@ class ReportController extends Controller
      * @param  $periode [date]
      * @return response
      */
-    public function show(Request $request)
+    public function show($begin, $end)
     {
-  //   	$this->validate($request, [
-		// 	'begin' => 'required',
-		// 	'end' => 'required',
-		// ]);
+		$from 	= date('l, j F Y 00:00:00', strtotime($begin));
+		$to 	= date('l, j F Y 23:59:59', strtotime($end));
 
-		// $from = date('Y-m-d', strtotime(Input::get('begin')));
-		// $to = date('Y-m-d', strtotime(Input::get('end')));
-
-		// $transaction = Transaction::whereHas('product', function($q) {
-		// 	$from = date('Y-m-d', strtotime(Input::get('begin')));
-		// 	$to = date('Y-m-d', strtotime(Input::get('end')));
-
-		// 	$q->whereBetween('tanggal', [$from,$to]);
-		// })->get();
-
-		// return view('report.getPeriode', compact('transaction', 'from', 'to'));
+		$transaction = 	Item::whereBetween('created_at', [
+							date('Y-m-d 00:00:00', strtotime($begin)), 
+							date('Y-m-d 23:59:59', strtotime($end))
+						])
+						->paginate(10);
+						
+		return view('report.show')->with(compact('transaction', 'from', 'to'));
     }
 }
