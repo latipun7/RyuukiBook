@@ -71,6 +71,13 @@
                             <p>Books</p>
                         </a>
                     </li>
+
+                    <li class="@yield('report')">
+                        <a href="{{ route('report.index') }}">
+                            <i class="material-icons">assessment</i>
+                            <p>Report</p>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -183,6 +190,6 @@
     <script src="/js/material-dashboard.js"></script>
 
     <!--   Other Scripts   -->
-    @section('script')
+    @yield('scripts')
 
 </html>

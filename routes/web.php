@@ -39,4 +39,6 @@ Route::group(['prefix'=>'admin', 'middleware'=>['auth', 'role:admin']], function
 	Route::get('/home', 'HomeController@index');
 	Route::resource('categories', 'CategoriesController');
 	Route::resource('books', 'BooksController');
+	Route::get('/report', ['as' => 'report.index', 'uses' => 'ReportController@index']);
+	Route::post('/report/show', ['as' => 'report.show', 'uses' => 'ReportController@show']);
 });
