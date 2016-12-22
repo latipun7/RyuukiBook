@@ -32,7 +32,9 @@
                                     <img class="img-base" src="{{ asset('/images/book_covers/no_image.jpg') }}" />
                                 @endif
                             {{-- </div> --}}   
-                            <img class="top" src="{{ asset('/images/tag_popular.png') }}" /> 
+                            <div class="top">
+                                <img class="top" src="{{ asset('/images/tag_popular.png') }}" />
+                            </div>
                         </div>
                     </div>
                 </div>

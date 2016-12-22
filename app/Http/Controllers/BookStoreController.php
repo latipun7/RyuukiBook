@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use Auth;
 use Session;
 use App\User;
@@ -17,7 +18,8 @@ class BookStoreController extends Controller
 {
 	public function __construct()
 	{
-		$this->featured = Book::latest()->first();
+		$this->featured = Book::join('items', 'books.id', '=', 'items.book_id')
+							->orderBy(DB::raw('SUM(`qty`)'), 'desc')->groupBy('items.book_id')->first();
 		$this->books    = Book::latest()->paginate(4);
 	}
 

@@ -24,15 +24,15 @@
 
                 <div class="col-md-6 col-sm-6">
                     <div class="tab-content">
-
+                        <div class="img-base">
                         {{-- <div class="tab-pane" id="product-page1"> --}}
                             @if (!empty($book->cover))
                                 <img src="{{ asset('/images/book_covers/'.$book->cover) }}" />
                             @else
                                 <img src="{{ asset('/images/book_covers/no_image.jpg') }}" />
                             @endif
-                          {{-- </div> --}}
-
+                        {{-- </div> --}}
+                        </div>
                     </div>
                 </div>
 
