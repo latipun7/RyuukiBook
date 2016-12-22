@@ -49,6 +49,7 @@
 
                     <div class="wizard-footer">
                         <div class="pull-right">
+                            <button onclick="myFunction()" class='btn btn-danger'><i class="material-icons">print</i></button>
                             <a href='/' class='btn btn-fill btn-info btn-wd'>Close</a>
                         </div>
                         <div class="clearfix"></div>
@@ -61,4 +62,9 @@
 @endsection
 
 @section('script')
+<script>
+    function myFunction() {
+        window.print();
+    }
+</script>
 @endsection
