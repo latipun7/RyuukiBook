@@ -41,4 +41,5 @@ Route::group(['prefix'=>'admin', 'middleware'=>['auth', 'role:admin']], function
 	Route::resource('books', 'BooksController');
 	Route::get('/report', ['as' => 'report.index', 'uses' => 'ReportController@index']);
 	Route::get('/report/show/{begin?}/{end?}', ['as' => 'report.show', 'uses' => 'ReportController@show']);
+	Route::get('/invoice/{invoice}', ['as' => 'report.invoice', 'uses' => 'ReportController@invoice']);
 });

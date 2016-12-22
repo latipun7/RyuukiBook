@@ -151,12 +151,18 @@ class BookStoreController extends Controller
 			User::find(Auth::id())->profile()->save($address);
 		}
 
+		$invoice	 = $request->invoice;
+		$order		 = 	Order::where('invoice', '=', $invoice)->first();
+		$transaction = 	Item::whereHas('order', function ($query) use($invoice) {
+						    $query->where('invoice', '=', $invoice);
+						})->get();
+
 		Session::flash("flash_notification", [
             "level"=>"success",
             "message"=>"Thank you! We will send your books after confirming your purchase."
         ]);
 
-        return redirect('/');
+        return view('report.invoice')->with(compact('order', 'transaction', 'invoice'));
 	}
 
 	/**
@@ -206,11 +212,17 @@ class BookStoreController extends Controller
 			$address->save();
 		}
 
+		$invoice	 = $request->invoice;
+		$order		 = 	Order::where('invoice', '=', $invoice)->first();
+		$transaction = 	Item::whereHas('order', function ($query) use($invoice) {
+						    $query->where('invoice', '=', $invoice);
+						})->get();
+
 		Session::flash("flash_notification", [
             "level"=>"success",
             "message"=>"Thank you! We will send your books after confirming your purchase."
         ]);
 
-        return redirect('/');
+        return view('report.invoice')->with(compact('order', 'transaction', 'invoice'));
 	}
 }

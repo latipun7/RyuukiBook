@@ -76,7 +76,7 @@
                                Subotal
                             </td>
                             <td class="td-price">
-                                {{ "Rp ".Cart::instance('shopping')->total(2, ',', '.') }}
+                                {{ "Rp ".Cart::instance('shopping')->subtotal(2, ',', '.') }}
                             </td>
                         </tr>
                         <tr>

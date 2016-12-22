@@ -23,7 +23,7 @@
                 <tbody>
                     @foreach( $transaction as $trans )
                         <tr>
-                            <td><a href="#">{{ $trans->order->invoice }}</a></td>
+                            <td><a href="{{ route('report.invoice', $trans->order->invoice) }}">{{ $trans->order->invoice }}</a></td>
                             <td>{{ $trans->order->user->name }}</td>
                             <td>{{ $trans->book->title }}</td>
                             <td class="text-right">{{ "Rp ".number_format($trans->book->price,2, ',', '.') }}</td>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Item;
+use App\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
@@ -34,4 +35,18 @@ class ReportController extends Controller
 						
 		return view('report.show')->with(compact('transaction', 'from', 'to'));
     }
+
+	/**
+	 * View invoice transaction
+	 * @param  [string] $invoice [invoice]
+	 * @return [view]          
+	 */
+	public function invoice($invoice)
+	{
+		$order		 = 	Order::where('invoice', '=', $invoice)->first();
+		$transaction = 	Item::whereHas('order', function ($query) use($invoice) {
+						    $query->where('invoice', '=', $invoice);
+						})->get();
+		return view('report.invoice')->with(compact('order', 'transaction', 'invoice'));
+	}
 }
