@@ -25,7 +25,8 @@
                         <div class="wizard-navigation">
                             <ul>
                                 <li><a href="#plan" data-toggle="tab">Plan</a></li>
-                                <li><a href="#complete" data-toggle="tab">Complete</a></li>
+                                <li><a href="#address" data-toggle="tab">Address</a></li>
+                                <li><a href="#payment" data-toggle="tab">Payment</a></li>
                             </ul>
                         </div>
 
@@ -55,7 +56,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab-pane" id="complete">
+                            <div class="tab-pane" id="address">
                                 <div class="row">
                                     <div id="methodPackage">
                                         <div class="col-sm-12">
@@ -133,6 +134,96 @@
 
                                 </div>
                             </div>
+                            <div class="tab-pane" id="payment">
+                                <h4 class="info-text"> Choose payment method <span style="color: #f00;">(select one)</span> </h4>
+                                <div class="row">
+                                    <div class="col-sm-10 col-sm-offset-1">
+                                        <div class="col-sm-6">
+                                            <div class="choice choice-cash" data-toggle="wizard-radio">
+                                                <input type="radio" name="payment" value="CASH">
+                                                <div class="icon">
+                                                    <i class="material-icons">attach_money</i>
+                                                </div>
+                                                <h6>CASH</h6>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="choice choice-atm" data-toggle="wizard-radio">
+                                                <input type="radio" name="payment" value="ATM">
+                                                <div class="icon">
+                                                    <i class="material-icons">credit_card</i>
+                                                </div>
+                                                <h6>ATM</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div id="methodCash">
+                                        <div class="col-sm-12">
+                                            <h4 class="text-center"> <b>Choose your closest store</b> </h4>
+                                            <h6 class="info-text"> This will be used for you to pay. </h6>
+                                        </div>
+                                        <div class="col-sm-4 col-sm-offset-1">
+                                            <div class="form-group label-static">
+                                                <label class="control-label">Bookstore</label>
+                                                <select id="bookstore">
+                                                    <option value="seyegan">Seyegan</option>
+                                                    <option value="godean">Godean</option>
+                                                    <option value="jakal">Jl. Kaliurang</option>
+                                                    <option value="malioboro">Malioboro</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div id="related_seyegan_content">
+                                                Address: Terwilen, RT02, RW29, Margodadi, Seyegan, Sleman
+                                            </div>
+                                            <div id="related_godean_content">
+                                                Address: Jl. Adhiyaksa no 4, Godean, Sleman
+                                            </div>
+                                            <div id="related_jakal_content">
+                                                Address: Jl. Kaliurang no 89
+                                            </div>
+                                            <div id="related_malioboro_content">
+                                                Address: Malioboro nomor 19
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div id="methodATM">
+                                        <div class="col-sm-12">
+                                            <h4 class="text-center"> <b>Choose your bank</b> </h4>
+                                            <h6 class="info-text"> This will be used for you to send to our bank. </h6>
+                                        </div>
+                                        <div class="col-sm-4 col-sm-offset-1">
+                                            <div class="form-group label-static">
+                                                <label class="control-label">Bank</label>
+                                                <select id="bank">
+                                                    <option value="mandiri">Mandiri</option>
+                                                    <option value="bca">BCA</option>
+                                                    <option value="bni">BNI</option>
+                                                    <option value="bri">BRI</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div id="related_mandiri_content">
+                                                Rek : 777777
+                                            </div>
+                                            <div id="related_bca_content">
+                                                Rek : 888888
+                                            </div>
+                                            <div id="related_bni_content">
+                                                Rek : 999999
+                                            </div>
+                                            <div id="related_bri_content">
+                                                Rek : 555555
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="wizard-footer">
                             <div class="pull-right">
@@ -155,6 +246,13 @@
 
 @section('script')
 <script type="text/javascript">
+    $( document ).ready(function() {
+        $('#methodCash').hide();
+        $('#methodATM').hide();
+        $("#related_seyegan_content").show().siblings().hide();
+        $("#related_mandiri_content").show().siblings().hide();
+    });
+
     $("input, .wizard-navigation").on( "click", function() {
 
         wizard = $(this).closest('.wizard-card');
@@ -172,6 +270,26 @@
             });
         }
 
+    });
+
+    $(".choice-cash").on( "click", function() {
+        $('#methodCash').show();
+        $('#methodATM').hide();
+    });
+
+    $(".choice-atm").on( "click", function() {
+        $('#methodCash').hide();
+        $('#methodATM').show();
+    });
+
+    $("#bookstore").on("change", function() {
+        id = "related_" + $(this).val() + "_content";
+        $("#" + id).show().siblings().hide()
+    });
+
+    $("#bank").on("change", function() {
+        id = "related_" + $(this).val() + "_content";
+        $("#" + id).show().siblings().hide()
     });
 </script>
 @endsection
