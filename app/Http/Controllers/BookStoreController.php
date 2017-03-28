@@ -10,6 +10,7 @@ use App\Book;
 use App\Item;
 use App\Order;
 use App\Profile;
+use App\Category;
 
 use Illuminate\Http\Request;
 use Gloudemans\Shoppingcart\Facades\Cart;
@@ -18,9 +19,10 @@ class BookStoreController extends Controller
 {
 	public function __construct()
 	{
-		$this->featured = Book::join('items', 'books.id', '=', 'items.book_id')
+		$this->featured   = Book::join('items', 'books.id', '=', 'items.book_id')
 							->orderBy(DB::raw('SUM(`qty`)'), 'desc')->groupBy('items.book_id')->first();
-		$this->books    = Book::latest()->paginate(4);
+		$this->books      = Book::latest()->paginate(4);
+		$this->categories = Category::all();
 	}
 
 	/**
@@ -29,9 +31,10 @@ class BookStoreController extends Controller
      * @return \Illuminate\Http\Response
 	 */
     public function index() {
-    	$books 	  = $this->books;
-    	$featured = $this->featured;
-		return view('bookstore.index')->with(compact('featured', 'books'));
+    	$books 	    = $this->books;
+    	$featured   = $this->featured;
+    	$categories = $this->categories;
+		return view('bookstore.index')->with(compact('featured', 'books', 'categories'));
 	}
 
 	/**
@@ -224,5 +227,17 @@ class BookStoreController extends Controller
         ]);
 
         return view('report.invoice')->with(compact('order', 'transaction', 'invoice'));
+	}
+
+	/**
+	 * Category filter.
+	 * @param filter
+	 */
+	public function filter(Request $request)
+	{
+		// $books 	    = $this->books;
+  //   	$featured   = $this->featured;
+  //   	$categories = $this->categories;
+		// return view('bookstore.index')->with(compact('featured', 'books', 'categories'));
 	}
 }

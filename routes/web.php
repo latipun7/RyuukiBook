@@ -12,6 +12,7 @@
 */
 
 Route::get('/', 'BookStoreController@index');
+Route::post('/', ['as' => 'bookstore.filter', 'uses' => 'BookStoreController@filter']);
 
 Auth::routes();
 

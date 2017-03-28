@@ -96,6 +96,26 @@
 
         <div class="related-products">
             <h3 class="title text-center">All books:</h3>
+
+            <div>
+                <form class="form-horizontal" role="form" method="POST" action="{{ route('bookstore.filter') }}">
+                {{ csrf_field() }}
+                    <div class="form-group col-sm-10">
+                        <select class="form-control input-lg" name="opt_category">
+                            <option value="">All Categories</option>
+                            @foreach($categories as $category)
+                            
+                                <option value="{{$category->id}}">{{$category->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="form-group col-sm-2">
+                        <button type="submit" class="btn btn-rose">Filter</button>
+                    </div>
+                </form>
+            </div>
+
             <div class="row">
                 
                 @foreach($books as $item)
