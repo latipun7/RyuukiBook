@@ -117,9 +117,8 @@
             </div>
 
             <div class="row">
-                
-                @foreach($books as $item)
 
+                @foreach($books as $item)
                     <div class="col-sm-6 col-md-3">
                         <div class="card card-product">
                             <div class="card-image">
@@ -155,8 +154,11 @@
 
                         </div>
                     </div>
-
                 @endforeach
+                
+                @unless (count($books))
+                    <div class="col-sm-12 text-center"><h3>Unfortunately, no items were returned.</h3></div>
+                @endunless
 
             </div>
             

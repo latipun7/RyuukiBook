@@ -235,9 +235,15 @@ class BookStoreController extends Controller
 	 */
 	public function filter(Request $request)
 	{
-		// $books 	    = $this->books;
-  //   	$featured   = $this->featured;
-  //   	$categories = $this->categories;
-		// return view('bookstore.index')->with(compact('featured', 'books', 'categories'));
+    	$featured   = $this->featured;
+    	$categories = $this->categories;
+
+    	if ( !empty($request->input('opt_category')) ) {
+    		$books = Book::where('category_id', '=', $request->input('opt_category'))->latest()->paginate(4);
+    	} else {
+    		$books = $this->books;
+    	}
+
+		return view('bookstore.index')->with(compact('featured', 'books', 'categories'));
 	}
 }
