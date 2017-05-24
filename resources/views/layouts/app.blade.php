@@ -69,6 +69,13 @@
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
+                    <form class="navbar-form navbar-left" role="search">
+                        <div class="form-group form-white">
+                          <input type="text" class="form-control" placeholder="Search">
+                        </div>
+                        <button type="submit" class="btn btn-white btn-raised btn-fab btn-fab-mini"><i class="material-icons">search</i></button>
+                    </form>
+
                     @if (Auth::guest())
                         <li><a href="{{ url('/login') }}"><i class="material-icons">fingerprint</i> Login</a></li>
                         <li><a href="{{ url('/register') }}"><i class="material-icons">person_add</i> Register</a></li>
