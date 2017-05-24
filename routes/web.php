@@ -16,6 +16,9 @@ Route::post('/', ['as' => 'bookstore.filter', 'uses' => 'BookStoreController@fil
 
 Auth::routes();
 
+/** SEARCH ROUTES **/
+Route::get('/','Api\SearchController@search');
+
 /** BOOKSTORE GROUP */
 Route::group(['prefix' => 'book'], function() {
 
