@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 
 class Book extends Model
 {
+	use Searchable;
+	
     protected $fillable = [
     	'category_id', 'title', 'desc', 'author', 'publisher', 'price'
     ];
