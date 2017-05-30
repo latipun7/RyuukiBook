@@ -69,9 +69,10 @@
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
-                    <form class="navbar-form navbar-left" role="search">
+                    <form class="navbar-form navbar-left" role="search" action="{{ route('searching') }}" method="GET">
+                        {{ csrf_field() }}
                         <div class="form-group form-white">
-                          <input type="text" class="form-control" placeholder="Search">
+                          <input type="text" name="q" class="form-control" placeholder="Search">
                         </div>
                         <button type="submit" class="btn btn-white btn-raised btn-fab btn-fab-mini"><i class="material-icons">search</i></button>
                     </form>

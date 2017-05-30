@@ -13,12 +13,14 @@ class SearchController extends Controller
     	$error = ['error'=>'No result found.'];
 
     	if ($req->has('q')) {
-    		$books = Book::search($req->get('q'))->get();
+    		$books = Book::search($req->get('q'))->paginate(4);
 
-    		return $books->count() ? $books : $error;
-    	} else {
-    		$books = Book::all();
-    		return view('layouts\search')->withBook($books);
+    		// return $books->count() ? $books : $error;
+            return view('layouts\search')->with(compact('books'));
+    	} 
+        else {
+    		$books = Book::latest()->paginate(4);
+    		return view('layouts\search')->with(compact('books'));
     	}
     }
 }
