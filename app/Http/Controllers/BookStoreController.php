@@ -20,7 +20,7 @@ class BookStoreController extends Controller
 	public function __construct()
 	{
 		$this->featured   = Book::join('items', 'books.id', '=', 'items.book_id')
-							->orderBy(DB::raw('SUM(`qty`)'), 'desc')->groupBy('items.book_id')->first();
+							->orderBy(DB::raw('SUM(`qty`)'), 'desc')->groupBy('books.id')->first();
 		$this->books      = Book::latest()->paginate(4);
 		$this->categories = Category::all();
 	}

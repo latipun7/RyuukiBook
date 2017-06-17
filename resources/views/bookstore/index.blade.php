@@ -84,7 +84,7 @@
                     </div><!--  end acordeon -->
 
                     <div class="row text-right">
-                        <a href="{{ route('bookstore.addToCart', $featured->id) }}" class="btn btn-rose btn-round">Add to Cart &nbsp;<i class="material-icons">shopping_cart</i></a>
+                        <a href="{{ route('bookstore.addToCart', $featured->book_id) }}" class="btn btn-rose btn-round">Add to Cart &nbsp;<i class="material-icons">shopping_cart</i></a>
                     </div>
                 </div>
 
